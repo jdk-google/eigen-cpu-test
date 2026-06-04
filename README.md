@@ -17,7 +17,7 @@ Threads    | Time          | CPU Time      | Verification
         48 |     0.468160s |    21.397860s | Result: 375053.301
         64 |     0.444695s |    25.261024s | Result: 375053.301
 
---- Speedup Summary ---
+--- Speedup Summary ---  
 2 Threads:  2.00x speedup  
 4 Threads:  3.99x speedup  
 8 Threads:  7.91x speedup  
