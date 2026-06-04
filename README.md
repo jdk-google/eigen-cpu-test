@@ -1,10 +1,10 @@
 Testing how Eigen Matrix multiplication scales with more threads 
 
 
-Results on 64 hyper-thread machine:
+Results on 64 hyper-thread machine:  
 
-Running Baseline (1 Thread)...
-Baseline Time: 14.854s. CPU_Time 14.7776 s (result: 375053.301)
+Running Baseline (1 Thread)...  
+Baseline Time: 14.854s. CPU_Time 14.7776 s (result: 375053.301)  
 
 Threads    | Time          | CPU Time      | Verification
 -----------|---------------|---------------|-------------------
