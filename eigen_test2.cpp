@@ -47,7 +47,6 @@ double run_multi_threaded_test_omp(int num_threads) {
 
     auto start_time = std::chrono::high_resolution_clock::now();
     auto start_cpu_time = getProcessCpuTime();
-   	
 
     const int num_chunks = 1000;
     std::vector<double> results(num_chunks);
@@ -71,7 +70,7 @@ double run_multi_threaded_test_omp(int num_threads) {
               << std::setprecision(6)
               << std::setw(12) << diff.count() << "s | "
               << std::setw(12) << cpu_time_diff << "s | "
-              << "Result: " << std::fixed << std::setprecision(12) << result << "\n";
+              << "Result: " << std::fixed << std::setprecision(3) << result << "\n";
               
     return diff.count();
 }
@@ -94,14 +93,15 @@ int main() {
     std::cout << "Running Baseline (1 Thread)..." << std::endl;
     auto start_cpu_time = getProcessCpuTime();
     auto start_baseline = std::chrono::high_resolution_clock::now();
-    double pi_baseline = run_single_threaded_test();
+    double result_baseline = run_single_threaded_test();
     auto end_cpu_time = getProcessCpuTime();
     auto end_baseline = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_baseline = end_baseline - start_baseline;
     double t_baseline = diff_baseline.count();
     double baseline_cpu = end_cpu_time - start_cpu_time;
     
-    std::cout << "Baseline Time: " << t_baseline << "s. CPU_Time " << baseline_cpu << " s(Pi: " << pi_baseline << ")\n" << std::endl;
+    std::cout << "Baseline Time: " << t_baseline << "s. CPU_Time " << baseline_cpu 
+              << " s (result: " << std::fixed << std::setprecision(3) <<result_baseline << ")\n" << std::endl;
 
     // 2. Comparative Benchmarks
     std::cout << "Threads    | Time          | CPU Time      | Verification" << std::endl;
@@ -114,6 +114,7 @@ int main() {
     double t24 = run_multi_threaded_test_omp(24);
     double t32 = run_multi_threaded_test_omp(32);
     double t48 = run_multi_threaded_test_omp(48);
+    double t64 = run_multi_threaded_test_omp(64);
 
     // 3. Summary Report
     std::cout << "\n--- Speedup Summary ---" << std::fixed << std::setprecision(2) << std::endl;
@@ -124,6 +125,7 @@ int main() {
     std::cout << "24 Threads: " << t_baseline / t24 << "x speedup" << std::endl;
     std::cout << "32 Threads: " << t_baseline / t32 << "x speedup" << std::endl;
     std::cout << "48 Threads: " << t_baseline / t48 << "x speedup" << std::endl;
+    std::cout << "64 Threads: " << t_baseline / t64 << "x speedup" << std::endl;
     
     return 0;
 }
